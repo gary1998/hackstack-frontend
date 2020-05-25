@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Loading, ToastNotification } from 'carbon-components-react';
+import { connect } from 'react-redux';
+import { Route, HashRouter } from 'react-router-dom';
+import AppLayout from './components/AppLayout';
+import Splash from './pages/Splash';
+import ManageEvents from './pages/ManageEvents';
+import ManageRegistrations from './pages/ManageRegistrations';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render(){
+    return (
+      <div className="App">
+          {this.props.busy?<Loading description={"Loading, please wait..."} active={true} withOverlay={true}/>:<></>}
+          <AppLayout >
+            <HashRouter>
+                <Route exact path="/" render={() => <Splash />}></Route>
+                <Route exact path="/home" render={() => <Splash />}></Route>
+                <Route path="/adminEvents" render={() => <ManageEvents />}></Route>
+                <Route path="/adminRegistrations" render={() => <ManageRegistrations/>}></Route>
+                {/* <Route path="/faq" render={() => <FAQ/>}></Route>
+                <Route path="/recovery" render={() => <Recovery/>}></Route>
+                <Route path="/configure" render={() => <Configure />}></Route> */}
+            </HashRouter>
+          </AppLayout>
+          {this.props.message?<div className="toast"><ToastNotification timeout={5000} kind={this.props.message.kind} caption={new Date().toLocaleString()} title={this.props.message.title} subtitle={<span>{this.props.message.text}</span>} /></div>:<></>}
+      </div>
+    );
+  }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    busy: state.busy,
+    message: state.message
+  }
+}
+
+export default connect(mapStateToProps)(App);
