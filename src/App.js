@@ -18,9 +18,6 @@ class App extends React.Component {
                 <Route exact path="/home" render={() => <Splash />}></Route>
                 <Route path="/adminEvents" render={() => <ManageEvents />}></Route>
                 <Route path="/adminRegistrations" render={() => <ManageRegistrations/>}></Route>
-                {/* <Route path="/faq" render={() => <FAQ/>}></Route>
-                <Route path="/recovery" render={() => <Recovery/>}></Route>
-                <Route path="/configure" render={() => <Configure />}></Route> */}
             </HashRouter>
           </AppLayout>
           {this.props.message?<div className="toast"><ToastNotification timeout={5000} kind={this.props.message.kind} caption={new Date().toLocaleString()} title={this.props.message.title} subtitle={<span>{this.props.message.text}</span>} /></div>:<></>}

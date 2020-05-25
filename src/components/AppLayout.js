@@ -27,6 +27,7 @@ class AppLayout extends React.Component {
   }
 
   _handleLogout = async() => {
+    window.location.href = "/";
     await this.props.logout();
   }
 
@@ -82,9 +83,6 @@ class AppLayout extends React.Component {
                         <SideNavLink href="#adminRegistrations" renderIcon={Event20}>
                           Event Registration
                         </SideNavLink>
-                        {/* <SideNavLink href="#yourEvents" renderIcon={Catalog20}>
-                          Your Events
-                        </SideNavLink> */}
                         <SideNavLink href="#adminEvents" renderIcon={Notebook20}>
                           All Events
                         </SideNavLink>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { loginUser, setBusy } from '../Actions';
-import AppLayout from '../components/AppLayout';
 import { connect } from 'react-redux';
 import { Button, Modal, TextInput } from 'carbon-components-react';
 import { Login32, Event32 } from '@carbon/icons-react';
